@@ -1,4 +1,6 @@
 
+def isBadVersion(version: int) -> bool:
+    return 0
 class Solution:
     def firstBadVersion(self, n: int) -> int:
         left = 1
