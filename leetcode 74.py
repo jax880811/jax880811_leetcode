@@ -35,3 +35,7 @@ target = 3
 
 solution = Solution()
 print(solution.searchMatrix(matrix,target))
+'''
+先尋找target可能在哪個list當中
+再從可能的那個list當中尋找
+'''
