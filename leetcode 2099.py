@@ -16,3 +16,9 @@ k = 3
 solution = Solution()
 print(solution.maxSubsequence(nums,k))
 
+'''
+先創建一個heap做排序與整理
+做成二元陣列，第一個元素代表著原本list的元素數值，第二個代表索引值
+先找出前k大的元素數值後，再根據索引值進行排序整理
+最後回傳排序後的heap元素數值
+'''

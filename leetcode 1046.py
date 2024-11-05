@@ -11,9 +11,6 @@ class Solution:
             s2 = stones.pop()
             if s1>s2:
                 stones.insert(len(stones),s1-s2)
-                
-
-
         return 0
     
 
