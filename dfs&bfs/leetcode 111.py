@@ -8,11 +8,18 @@ class TreeNode:
 
 class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
-        if not root:#連根節點都沒有，就回傳0
-            return 0
-        if not root.left and not root.right:#只有根節點，就回傳1
-            return 1
-        return min(self.minDepth(root.left), self.minDepth(root.right)) + 1 #往左子節點根右子節點持續尋找深度
+        if not root:
+            return 0  
+        # 如果根節點為空，深度為 0
+
+        # 如果沒有左子樹或右子樹，返回另一側的深度
+        if not root.left:
+            return self.minDepth(root.right) + 1
+        if not root.right:
+            return self.minDepth(root.left) + 1
+
+        # 同時有左右子樹時，取左右子樹深度的最小值
+        return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
         
 
 def list_to_tree(values: List[Optional[int]]) -> Optional[TreeNode]:
