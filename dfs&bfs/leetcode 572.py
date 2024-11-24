@@ -8,24 +8,19 @@ class TreeNode:
 
 class Solution:
     def dfs(self,root,subRoot):
-        if not root and not subRoot:
-            return True
-        if root.left == subRoot.left and root.right == subRoot.right:
-            self.dfs(root.left,subRoot.left)
-            self.dfs(root.right,subRoot.right)
-        return False
-    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         if root is None and subRoot is None:
             return True
-        elif root is None and subRoot is not None:
-            return 
-        if root.val == subRoot.val:
-            if self.dfs(root,subRoot):
-                return True
-        self.isSubtree(root.left,subRoot)
-        self.isSubtree(root.right,subRoot)
+        if root is None or subRoot is  None or root.val != subRoot.val:
+            return False
+        return self.dfs(root.left,subRoot.left) and self.dfs(root.right,subRoot.right)
         
-        return False
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        if subRoot is None:
+            return True
+        if root is None:
+            return False
+        
+        return self.dfs(root,subRoot) or self.isSubtree(root.left,subRoot) or self.isSubtree(root.right,subRoot)
 
 def list_to_tree(values: List[Optional[int]]) -> Optional[TreeNode]:
     if not values:  # 如果列表為空，返回 None
