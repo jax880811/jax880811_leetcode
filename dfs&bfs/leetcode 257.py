@@ -25,7 +25,7 @@ class Solution:
         return answer
 '''
 本題需要用深度搜尋或者用廣度搜尋
-先用answer暫時儲存
+先用answer暫時儲存既有的路徑，一旦在某一區到底了就先暫存並且記錄下來
 '''
 
 def list_to_tree(values: List[Optional[int]]) -> Optional[TreeNode]:

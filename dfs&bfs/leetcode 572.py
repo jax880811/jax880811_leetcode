@@ -8,9 +8,9 @@ class TreeNode:
 
 class Solution:
     def dfs(self,root,subRoot):
-        if root is None and subRoot is None:
+        if root is None and subRoot is None:#跑完root跟subroot都沒有節點，就代表確實是子節點
             return True
-        if root is None or subRoot is  None or root.val != subRoot.val:
+        if root is None or subRoot is  None or root.val != subRoot.val:#subroot或者root跑完或者目前的root值跟subroot對不起來，那就是錯誤，並非subroot
             return False
         return self.dfs(root.left,subRoot.left) and self.dfs(root.right,subRoot.right)
         
