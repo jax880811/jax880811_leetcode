@@ -8,7 +8,7 @@ class TreeNode:
 
 class Solution:
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
-        answer = float('inf')
+        answer = float('inf')#預設無限大
         inorder_array = []
         def inorder(root):
             if not root:
@@ -19,7 +19,13 @@ class Solution:
         inorder(root)
         for i in range(1,len(inorder_array)):
             answer = min(answer,inorder_array[i]-inorder_array[i-1])
-        return answer        
+        return answer     
+'''
+二元搜尋樹的特性為所有在左邊的節點都小於根結點，所有在右邊的節點都大於根結點
+利用中序排序法對二元搜尋樹做重新排序，可以排出從最小到最大的陣列
+處理完之後，就重新進行比對，進行每個元素之間的比對，找出最小值
+'''
+   
 
 def list_to_tree(values: List[Optional[int]]) -> Optional[TreeNode]:
     if not values:  # 如果列表為空，返回 None
