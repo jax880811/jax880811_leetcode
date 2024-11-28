@@ -7,6 +7,7 @@ class Solution:
             return image
         queue = deque([(sr,sc)])
         while queue:
+            print(queue)
             x,y = queue.popleft()
             if image[x][y] == start_color:
                 image[x][y] = color
