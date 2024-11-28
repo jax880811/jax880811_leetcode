@@ -12,14 +12,17 @@ class Solution:
         if not root:
             return 0
         answer = 0
-        #answer += self.left_node(root.left)
-        if root.left and not root.left.right and not root.left.left:
+        
+        if root.left and not root.left.right and not root.left.left: #該根節點的左子節點存在，且這個左子節點並沒有其他的左右子節點，就可表示此為左葉節點
             answer += root.left.val
         
         answer += self.sumOfLeftLeaves(root.left)
         answer += self.sumOfLeftLeaves(root.right)
         return answer
-    
+'''
+題目只需要找所有左葉節點的值的總和
+'''    
+
 def list_to_tree(values: List[Optional[int]]) -> Optional[TreeNode]:
     if not values:  # 如果列表為空，返回 None
         return None
