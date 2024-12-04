@@ -26,7 +26,11 @@ class Solution:
             return True
         
         return dfs(root)
-
+'''
+找出這棵樹是不是有其中一個不一樣的元素
+那就用深度優先搜尋跑一遍
+如果找出不一樣的值馬上回傳false
+'''
 
 
 def list_to_tree(values: List[Optional[int]]) -> Optional[TreeNode]:
