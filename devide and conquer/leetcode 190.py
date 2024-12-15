@@ -1,5 +1,5 @@
 from typing import List
-import math
+
 
 class Solution:
     def reverseBits(self, n: int) -> int:
