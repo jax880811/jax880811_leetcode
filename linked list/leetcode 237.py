@@ -45,9 +45,23 @@ def list_to_linkedlist(elements):
 
 class Solution:
     def deleteNode(self, node):
-        
+        if head.val == n:
+            return head.next
+        ans = ListNode()
+        temp = ans
+        while head:
+            if head.val == n:
+                head.val = head.next.val
+                head.next = head.next.next
+            print(head.val)
+            temp.next = head
+            temp = temp.next
+            
+            head = head.next
+            
+        return ans.next
 
-        return 0
+        
 
 
 head = list_to_linkedlist([4,5,1,9])
