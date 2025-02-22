@@ -44,24 +44,34 @@ def print_tree_as_structure(node: Optional[TreeNode], level=0, prefix="Root: "):
 
 class Solution:
     def findSecondMinimumValue(self, root: Optional[TreeNode]) -> int:
-        if not root:
+        if not root: #沒有根節點直接-1
             return -1
-        if not root.left and not root.right:
+        if not root.left and not root.right: #只有根結點也-1
             return -1
-        min_val = root.val
+        min_val = root.val #題目說的，基本上根結點會是最小值
         self.second_val = float('inf')
         def dfs(root):
             if not root:
                 return 
-            if min_val < root.val < self.second_val:
+            if min_val < root.val < self.second_val: #尋找第二小的節點
                 self.second_val = root.val
             dfs(root.left)
             dfs(root.right)
         
-        dfs(root)
-        if self.second_val == min_val:
+        dfs(root) #尋找第二小的節點
+        if self.second_val == float('inf'): #沒有第二小的節點就回-1
             return -1
         return  self.second_val
+
+'''
+靠邀 我做錯好幾次
+這題就是尋找第二小的節點
+本來我的想法是想說把每個元素取出來再放到heap當中
+比對前面兩個值，長的一樣就回-1
+
+但是題目的tag是dfs跟tree
+'''
+
 
 
 root = [2,2,5,None,None,5,7]
