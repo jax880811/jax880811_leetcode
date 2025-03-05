@@ -65,7 +65,7 @@ def print_tree_as_structure(node: Optional[TreeNode], level=0, prefix="Root: "):
         print_tree_as_structure(node.right, level + 1, "R--- ")
 
 
-root = root = [1,2,3,None,5]
+root = root = [1,2,3,4,5]
 tree_root = list_to_tree(root)
 print_tree_as_structure(tree_root)
 solution = Solution()

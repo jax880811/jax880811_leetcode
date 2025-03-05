@@ -21,6 +21,19 @@ class Solution:
             return False
         
         return self.dfs(root,subRoot) or self.isSubtree(root.left,subRoot) or self.isSubtree(root.right,subRoot)
+    
+'''
+去對比每個左子樹或右子樹能不能對得起來
+其中一邊能夠達成目前的root跟subroot互相比對，若能出現完全一致的部分就是true
+
+這道題的核心在於判斷樹 t 是否是樹 s 的某個子樹。我們可以通過以下步驟來解決這個問題：
+遍歷樹 s:
+使用深度優先搜索（DFS）或廣度優先搜索（BFS）遍歷樹 s 的每個節點。
+檢查子樹:
+對於樹 s 中的每個節點，檢查以該節點為根的子樹是否與樹 t 完全相同。
+樹的比對:
+使用遞歸方法比對兩棵樹的結構和節點值是否完全相同。
+'''
 
 def list_to_tree(values: List[Optional[int]]) -> Optional[TreeNode]:
     if not values:  # 如果列表為空，返回 None
