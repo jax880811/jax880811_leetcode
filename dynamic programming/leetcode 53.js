@@ -1,5 +1,3 @@
-console.log("Hello, JavaScript!");
-
 
 var maxSubArray = function(nums) {
     if (!nums || nums.length === 0) {

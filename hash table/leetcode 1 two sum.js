@@ -7,11 +7,12 @@ var twoSum = function(nums, target) {
             return [map.get(element),i];
         }
         map.set(nums[i],i);
+        console.log(map)
     }
     return []
 };
 
-let nums = [3,3];
+let nums = [3,2,4];
 let target = 6;
 
 console.log(twoSum(nums,target));
