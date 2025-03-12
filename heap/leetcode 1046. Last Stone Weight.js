@@ -1,31 +1,40 @@
-import heapq
-from typing import List
+const { MinHeap } = require('heap-js');
 
-class Solution:
-    def lastStoneWeight(self, stones: List[int]) -> int:
-        # 將所有石頭的重量變為負數，這樣最小堆就能模擬最大堆
-        stones = [-stone for stone in stones]
-        heapq.heapify(stones)  # 將列表轉換為堆
+class Solution {
+    lastStoneWeight(stones) {
+        /**
+         * 計算最後一塊石頭的重量
+         * @param {number[]} stones - 石頭重量列表
+         * @return {number} - 最後剩下的石頭重量，如果沒有石頭剩下則返回 0
+         */
+        // 創建一個最小堆，並將所有石頭的重量取負數（模擬最大堆）
+        const maxHeap = new MinHeap();
+        for (const stone of stones) {
+            maxHeap.push(-stone); // 取負數模擬最大堆
+        }
 
-        while len(stones) > 1:
-            # 取出最重的兩個石頭
-            stone1 = -heapq.heappop(stones)  # 取出最重的石頭，並轉回正數
-            stone2 = -heapq.heappop(stones)  # 取出次重的石頭，並轉回正數
+        while (maxHeap.size() > 1) {
+            // 取出最重的兩個石頭（取負數還原）
+            const stone1 = -maxHeap.pop();
+            const stone2 = -maxHeap.pop();
 
-            if stone1 != stone2:
-                # 如果兩石頭重量不同，把剩下的重量放回堆中
-                heapq.heappush(stones, -(stone1 - stone2))
+            if (stone1 !== stone2) {
+                // 如果兩石頭重量不同，把剩下的重量放回堆中（取負數）
+                maxHeap.push(-(stone1 - stone2));
+            }
+        }
 
-        # 如果堆裡還有石頭，返回其重量，否則返回0
-        return -stones[0] if stones else 0
+        // 如果堆裡還有石頭，返回其重量（取負數還原），否則返回0
+        return maxHeap.size() > 0 ? -maxHeap.pop() : 0;
+    }
+}
 
+// 測試範例
+const stones = [2, 7, 4, 1, 8, 1];
+const solution = new Solution();
+console.log(solution.lastStoneWeight(stones)); // 輸出結果
 
-# 測試範例
-stones = [2, 7, 4, 1, 8, 1]
-solution = Solution()
-print(solution.lastStoneWeight(stones))  # 輸出結果
-
-'''
+/*
 LeetCode 1046: 最後一塊石頭的重量
 
 題目翻譯：
@@ -50,7 +59,7 @@ LeetCode 1046: 最後一塊石頭的重量
 
 2. 解題方法選擇：
    - 使用堆（Heap）來高效找到最重的兩塊石頭，並處理粉碎後的結果。
-   - Python 的 heapq 模組默認是最小堆，可以通過取負數來模擬最大堆。
+   - 使用 `heap-js` 模組的 `MinHeap`，並通過取負數來模擬最大堆。
 
 3. 解題步驟：
    - 將石頭列表轉換為最大堆（通過取負數實現）。
@@ -60,8 +69,8 @@ LeetCode 1046: 最後一塊石頭的重量
 
 重點筆記：
 1. **堆的使用**:
-   - 使用最大堆來高效找到最重的兩塊石頭。
-   - Python 的 heapq 模組默認是最小堆，可以通過取負數來模擬最大堆。
+   - 使用 `heap-js` 模組的 `MinHeap`，並通過取負數來模擬最大堆。
+   - 這樣可以避免手動實現最大堆的複雜性。
 
 2. **時間複雜度**:
    - 每次堆操作的時間複雜度為 O(log n)。
@@ -86,9 +95,9 @@ LeetCode 1046: 最後一塊石頭的重量
 
 函式功能說明：
 - `class Solution`：封裝解決方案的類。
-- `lastStoneWeight(self, stones)`：計算最後一塊石頭的重量。
-- `heapq`：Python 的堆模組，用於高效管理優先級隊列。
-- `heapify()`：將列表轉換為堆。
-- `heappop()`：移除並返回堆的最小元素。
-- `heappush()`：將元素插入堆中。
-'''
+- `lastStoneWeight(stones)`：計算最後一塊石頭的重量。
+- `MinHeap`：`heap-js` 模組的最小堆類，用於模擬最大堆。
+- `push(val)`：將元素插入堆中。
+- `pop()`：移除並返回堆的最小元素。
+- `size()`：返回堆的大小。
+*/

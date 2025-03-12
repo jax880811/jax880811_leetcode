@@ -75,7 +75,7 @@ class Solution {
          * @param {TreeNode} root - 二叉樹的根節點
          * @return {number} - 直徑（最長路徑的邊數）
          */
-        const depth = (node) => {
+        let depth = (node) => {
             if (!node) {
                 return 0;
             }
