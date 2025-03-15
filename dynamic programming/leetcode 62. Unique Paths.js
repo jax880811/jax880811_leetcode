@@ -1,31 +1,32 @@
-from typing import List
-class Solution:
-    def uniquePaths(self, m: int, n: int) -> int:
-        answer = [[1]*n for i in range(m)]
-        for i in range(1,m):
-            for j in range(1,n):
-                answer[i][j] = answer[i-1][j] + answer[i][j-1]
-        
-        return answer[m-1][n-1]
+class Solution {
+    
+    uniquePaths = function(m, n) {
+        let dp = new Array(m).fill(null).map(() => new Array(n).fill(1));
+        for (let i=0;i<m;i++){
+            for(let j=0;j<n;j++){
+                if (i-1>=0 && j-1>=0){
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                } 
+            }
+        }
 
 
+        return dp[m-1][n-1];
+    }
+}
 
-m = 3
-n = 7
+// 測試範例
+let m = 3;
+let n = 7;
 
-solution = Solution()
-print(solution.uniquePaths(m,n))
+// 創建 Solution 的實例
+let solution = new Solution();
 
-'''
-從最左上走到最右下有多少種方法，已知只能走下或者右，不能倒回
-就代表下一格能累積到的方法就是左邊一格+上面一格的總和
-因此就用迭代的方式進行，不斷更新最新的格數總和
 
-不過這題其實也是排列組合的經典問題
-使用公式C(M+N-2,N-1) = (M+N-2)!/(M-1)!(N-1)! 就能夠直接得到答案
-'''
-'''
-LeetCode 62: 不同的路徑數 (Unique Paths) (Python 實現)
+console.log(solution.uniquePaths(m,n));
+
+/*
+LeetCode 62: 不同的路徑數 (Unique Paths) (JavaScript 實現)
 
 題目翻譯：
 一個機器人位於一個 m x n 的網格的左上角（起始點在下圖標記為“Start” ）。
@@ -94,14 +95,14 @@ LeetCode 62: 不同的路徑數 (Unique Paths) (Python 實現)
 
 函式功能說明 (已移動到程式碼的行內註解):
 - `class Solution`: 定義解決方案類別。
-- `uniquePaths(self, m: int, n: int) -> int`: 計算唯一路徑數的核心方法。
-- `dp = [[1 for _ in range(n)] for _ in range(m)]`: 初始化一個 m x n 的二維陣列 `dp`，並用 1 填充。
-- `for i in range(m):`: 外層迴圈遍歷行。
-- `for j in range(n):`: 內層迴圈遍歷列。
-- `if i - 1 >= 0 and j - 1 >= 0:`: 判斷當前格子是否不是第一行或第一列。
-- `dp[i][j] = dp[i - 1][j] + dp[i][j - 1]`: 狀態轉移方程式，計算到達當前格子的路徑數。
-- `return dp[m - 1][n - 1]`: 返回右下角格子的路徑數。
-- `m = 3; n = 7`: 設定測試範例的網格尺寸。
-- `solution = Solution()`: 創建 `Solution` 實例。
-- `print(solution.uniquePaths(m, n))`: 調用 `uniquePaths` 方法並打印結果。
-'''
+- `uniquePaths(m, n)`: 計算唯一路徑數的核心方法。
+- `let dp = new Array(m).fill(null).map(() => new Array(n).fill(1));`: 初始化一個 m x n 的二維陣列 `dp`，並用 1 填充。
+- `for (let i=0;i<m;i++){ ... }`: 外層迴圈遍歷行。
+- `for(let j=0;j<n;j++){ ... }`: 內層迴圈遍歷列。
+- `if (i-1>=0 && j-1>=0){ ... }`: 判斷當前格子是否不是第一行或第一列。
+- `dp[i][j] = dp[i-1][j] + dp[i][j-1];`: 狀態轉移方程式，計算到達當前格子的路徑數。
+- `return dp[m-1][n-1];`: 返回右下角格子的路徑數。
+- `let m = 3; let n = 7;`: 設定測試範例的網格尺寸。
+- `let solution = new Solution();`: 創建 `Solution` 實例。
+- `console.log(solution.uniquePaths(m,n));`: 調用 `uniquePaths` 方法並打印結果。
+*/
