@@ -10,6 +10,7 @@ class Solution:
         """
         while stones:  # 當石頭列表不為空時，繼續處理
             stones = sorted(stones, reverse=False)  # 將石頭列表升序排序
+            
             s1 = stones.pop()  # 取出最重的石頭
             if not stones:  # 如果沒有其他石頭了，返回 s1
                 return s1
