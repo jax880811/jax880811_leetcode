@@ -60,6 +60,6 @@ class Solution:
 
 
 
-head = list_to_linkedlist([1,2,2,1])
+head = list_to_linkedlist([1,2,3,2,1])
 solution = Solution()
 print(solution.isPalindrome(head))
