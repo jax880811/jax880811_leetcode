@@ -27,7 +27,7 @@ let k = 2;
 // 創建 Solution 的實例
 let solution = new Solution();
 
-// 調用 twoSum 方法並輸出結果
+
 console.log(solution.kthFactor(n, k));  
 
 /*
