@@ -3,7 +3,7 @@ class Solution {
 
     longestPalindrome = function (s) {
         let n = s.length;
-        let dp = new Array(n).fill(null).map(() => Array(n).fill(1));
+        let dp = new Array(n).fill(null).map(() => Array(n).fill(false));
         let start = 0; // 最長回文子字串的起始索引。
         let maxLength = 1; // 最長回文子字串的長度，預設為 1（單個字元）。
 
