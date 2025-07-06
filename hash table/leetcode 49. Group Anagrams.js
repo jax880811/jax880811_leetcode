@@ -1,4 +1,4 @@
-export {};
+
 class Solution {
     /**
      * @param {string[]} strs
