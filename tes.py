@@ -12,7 +12,7 @@ class Solution:
         return result
 
 data1 = [1, 1, 1, 6, 3, 5, 4, 8, 7, 6, 3]
-data2 = [1, 6, 8]
+data2 = [1, 6, 8, 4]
 solution = Solution()
 
 print(solution.answer(data1, data2))

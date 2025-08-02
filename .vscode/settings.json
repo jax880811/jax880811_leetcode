@@ -1,0 +1,31 @@
+{
+    "workbench.colorCustomizations": {
+        "editor.background": "#1e1e1e",
+        "sideBar.background": "#252526",
+        "activityBar.background": "#333333",
+        "titleBar.activeBackground": "#3c3c3c",
+        "tab.activeBackground": "#1e1e1e",
+        "tab.inactiveBackground": "#2d2d2d",
+        "editorGroupHeader.tabsBackground": "#252526",
+        "panel.background": "#1e1e1e",
+        "statusBar.background": "#007acc"
+    },
+    "editor.tokenColorCustomizations": {
+        "comments": "#808080",
+        "textMateRules": [
+            {
+                "scope": ["comment", "comment.line", "comment.block"],
+                "settings": {
+                    "foreground": "#808080"
+                }
+            },
+            {
+                "scope": ["punctuation"],
+                "settings": {
+                    "foreground": "#ff8c00"
+                }
+            }
+        ]
+    },
+    "locale": "zh-tw"
+} 
