@@ -6,10 +6,10 @@
  * @returns 一個物件，鍵為 data2 中的元素，值為其在 data1 中出現的次數。
  */
 function countAnswer(data1, data2) {
-    var result = {};
-    for (var i = 0; i < data2.length; i++) {
-        var count = 0;
-        for (var j = 0; j < data1.length; j++) {
+    let result = {};
+    for (let i = 0; i < data2.length; i++) {
+        let count = 0;
+        for (let j = 0; j < data1.length; j++) {
             if (data1[j] === data2[i]) {
                 count++;
             }

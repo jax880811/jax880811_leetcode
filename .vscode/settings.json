@@ -27,5 +27,13 @@
             }
         ]
     },
-    "locale": "zh-tw"
+    "locale": "zh-tw",
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -std=c++11 \"$fileName\" -o \"$fileNameWithoutExt\" && \"$dir$fileNameWithoutExt\""
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.preserveFocus": false,
+    "code-runner.clearPreviousOutput": false,
+    "code-runner.saveFileBeforeRun": true,
+    "java.debug.settings.onBuildFailureProceed": true
 } 
