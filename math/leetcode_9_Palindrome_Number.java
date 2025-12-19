@@ -1,5 +1,4 @@
-import java.lang.*;
-
+package math;
 /**
  * LeetCode 9. Palindrome Number
  *
