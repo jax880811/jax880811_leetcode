@@ -29,11 +29,25 @@
     },
     "locale": "zh-tw",
     "code-runner.executorMap": {
-        "cpp": "cd $dir && g++ -std=c++11 \"$fileName\" -o \"$fileNameWithoutExt\" && \"$dir$fileNameWithoutExt\""
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt.exe && $fileNameWithoutExt.exe && del $fileNameWithoutExt.exe",
+        "c": "cd $dir ; if ($?) { gcc $fileName -o $fileNameWithoutExt } ; if ($?) { .\\$fileNameWithoutExt }",
+        "java": "java -Dfile.encoding=UTF-8 $file",
+        "python": "python -u",
+        "javascript": "node",
+        "typescript": "ts-node",
+        "go": "go run"
     },
     "code-runner.runInTerminal": true,
+    "code-runner.fileDirectoryAsCwd": true,
     "code-runner.preserveFocus": false,
     "code-runner.clearPreviousOutput": false,
     "code-runner.saveFileBeforeRun": true,
-    "java.debug.settings.onBuildFailureProceed": true
+    "code-runner.saveAllFilesBeforeRun": true,
+    "terminal.integrated.env.windows": {
+        "GPP_PATH": "C:\\msys64\\ucrt64\\bin\\g++.exe"
+    },
+    "java.debug.settings.onBuildFailureProceed": true,
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "python-envs.pythonProjects": []
 } 

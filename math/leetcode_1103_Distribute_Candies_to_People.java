@@ -12,8 +12,10 @@ class Solution {
             } else {
                 result[i] = result[i] + candies;
             }
+            candies -= candy;
             i++;
             candy++;
+        
             if (i >= num_people) {
                 i = 0;
             }

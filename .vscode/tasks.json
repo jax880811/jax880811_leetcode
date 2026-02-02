@@ -1,36 +1,4 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Compile & Run C (PowerShell, temp exe)",
-            "type": "shell",
-            "command": "powershell",
-            "args": [
-                "-NoProfile",
-                "-ExecutionPolicy",
-                "Bypass",
-                "-Command",
-                "& { $exe = Join-Path $env:TEMP 'leetcode_1103_run.exe'; gcc 'math/leetcode_1103_Distribute_Candies_to_People.c' -O2 -o $exe; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; & $exe; Remove-Item $exe -ErrorAction SilentlyContinue }"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "panel": "shared",
-                "showReuseMessage": false,
-                "clear": false
-            },
-            "problemMatcher": ["$gcc"],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            }
-        }
-    ]
-}
-{
     "tasks": [
         {
             "type": "cppbuild",
@@ -40,11 +8,13 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "${fileDirname}\\*.c",
+                "${fileDirname}\\*.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
-                "cwd": "C:\\msys64\\ucrt64\\bin"
+                "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
