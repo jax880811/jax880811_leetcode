@@ -20,6 +20,8 @@ class Solution {
 }
 //有自己做出來
 
+
+
 // 測試範例
 let n = 7;
 let k = 2;

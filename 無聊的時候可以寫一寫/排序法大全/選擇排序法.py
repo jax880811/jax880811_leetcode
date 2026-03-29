@@ -11,6 +11,7 @@ def selection_sort(arr : list[int]) -> list:
         # 假設目前掃描範圍的最左邊位置 i 就是最小值的索引 (Index)
         min_index = i
         
+        
         # 【內層迴圈】：從位置 i 往後搜尋到最後，尋找是否有更小的數
         # range(i, length, 1) 表示從 i 開始，到 length-1 結束，每次跳 1 步
         for j in range(i, length, 1):

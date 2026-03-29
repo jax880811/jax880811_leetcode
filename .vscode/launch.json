@@ -3,6 +3,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "JAVA3",
+            "request": "launch",
+            "mainClass": "JAVA3",
+            "projectName": "leetcode_47abaea0"
+        },
+        {
+            "type": "java",
+            "name": "java2",
+            "request": "launch",
+            "mainClass": "java2",
+            "projectName": "leetcode_47abaea0"
+        },
+        {
+            "type": "java",
+            "name": "java_1",
+            "request": "launch",
+            "mainClass": "java_1",
+            "projectName": "leetcode_47abaea0"
+        },
+        {
+            "type": "java",
             "name": "javatest_complete",
             "request": "launch",
             "mainClass": "javatest_complete",
