@@ -55,3 +55,67 @@ def dp(grid):
 Grid = [[0,0,0],[0,1,0],[0,0,0]]
 print(dp(Grid))
 
+'''
+def dp(grid):
+    # m 代表列數，也就是 grid 有幾橫列
+    # 例如 3 x 4 的表格，m = 3
+    m = len(grid)
+
+    # n 代表欄數，也就是每一列有幾個格子
+    # 例如 3 x 4 的表格，n = 4
+    n = len(grid[0])
+
+    # 建立一個二維 dp 陣列
+    # dp[row][column] 代表：
+    # 從左上角 (0,0) 走到目前格子 (row,column) 的路徑數
+    dp = []
+
+    # 逐列建立 dp 表
+    for i in range(m):
+
+        # 每一列都有 n 個欄位
+        # 一開始全部設為 0
+        dp.append([0] * n)
+
+    # 如果起點 grid[0][0] 是障礙物
+    # 題目規定 1 代表障礙物
+    # 那代表一開始就不能出發，所以路徑數為 0
+    if grid[0][0] == 1:
+        return 0
+
+    # 如果起點可以通行
+    # 從起點走到起點本身，算 1 種方式
+    dp[0][0] = 1
+
+    # 從左到右、從上到下，逐格填表
+    for row in range(m):
+
+        # 掃描目前列中的每一欄
+        for column in range(n):
+
+            # 起點已經在前面設定成 1
+            # 所以這裡直接跳過，避免被後面的公式重新處理
+            if row == 0 and column == 0:
+                continue
+
+            # 如果目前格子是障礙物
+            # 則不能走到這格
+            # 所以路徑數固定為 0
+            if grid[row][column] == 1:
+                dp[row][column] = 0
+                continue
+
+            # 如果目前不是第一列
+            # 代表可以從「上方格子」往下走到目前格子
+            if row > 0:
+                dp[row][column] += dp[row - 1][column]
+
+            # 如果目前不是第一欄
+            # 代表可以從「左方格子」往右走到目前格子
+            if column > 0:
+                dp[row][column] += dp[row][column - 1]
+
+    # 最後右下角 dp[m-1][n-1]
+    # 就是從左上角走到右下角的總路徑數
+    return dp[m - 1][n - 1]
+'''
