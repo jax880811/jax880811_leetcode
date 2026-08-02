@@ -9,11 +9,61 @@
 外來鍵說明：WorkOrder.meter_id 參照 Meter.meter_id；WorkOrder.emp_id 參照 Employee.emp_id。
 */
 
+
+/*
+請統計 2026 年各區處已完修與未完修工單數，輸出區處、已完修工單數及未完修工單數。（5 分）
+select m.district ,
+    sum(
+        case 
+            when w.finish_date is not null then 1
+            else 0
+        ) as 完修工單數 ,
+    sum(
+        case 
+            when w.finish_date is null then 1
+            else 0
+        ) as 未完修工單數
+from meter m
+join workorder w on m.meter_id = w.meter_id
+where 
+    w.report_date >= '2026-01-01' and
+    w.report_date < '2027-01-01'
+group by m.district 
+*/
+
+
 /*
 請列出所有電表之電表號碼、用戶名稱及 2026 年尚未完修工單的預估工時合計；
 若無尚未完修工單，預估工時合計須顯示 0。（5 分）
+select m.meter_id ,
+    m.customer_name ,
+    coalesce(sum(w.estimated_hours) , 0) as 預估工時合計
+from meter m
+left join
+    workorder w on m.meter_id = w.meter_id 
+    and w.report_date >= '2026-01-01' 
+    and w.report_date < '2027-01-01' 
+    and w.finish_date is null
+group by 
+    m.meter_id ,
+    m.customer_name
 
-
+-------------------
+SELECT
+    m.meter_id,                              -- 輸出電表號碼
+    m.customer_name,                         -- 輸出用戶名稱
+    COALESCE(SUM(w.estimated_hours), 0) AS 預估工時合計
+                                                -- 加總符合條件工單的預估工時
+                                                -- 若沒有符合工單，將 NULL 顯示為 0
+FROM Meter m
+LEFT JOIN WorkOrder w
+    ON m.meter_id = w.meter_id               -- 依電表號碼連接工單
+   AND w.report_date >= '2026-01-01'          -- 只連接 2026 年報修的工單
+   AND w.report_date < '2027-01-01'
+   AND w.finish_date IS NULL                  -- 只連接尚未完修的工單
+GROUP BY
+    m.meter_id,                               -- 每個電表形成一組
+    m.customer_name;                          -- 同時輸出用戶名稱
 */
 
 

@@ -1,0 +1,49 @@
+/*
+互斥集合（Disjoint Set），俗稱並查集（Union-Find），
+是一種用以維護「元素分屬哪些不相交集合」之資料結構，支援兩項核心操作：
+查詢某元素所屬集合之代表（Find），以及合併兩個集合（Union），常應用於判斷圖形之連通性與最小生成樹（Kruskal 演算法）。
+本實作以陣列表示森林（Forest）：每個集合為一棵樹，樹根即為該集合之代表元素。元素編號為 1～n。在 C 語言中宣告如下：
+#define MAXN 1001
+int parent[MAXN];   // parent[i] 為元素 i 之父節點；若 i 為樹根，則 parent[i] 等於 i 自己
+int sz[MAXN];       // sz[i] 僅在 i 為樹根時有意義，代表該集合之元素總數
+並定義以下函式：
+
+void init(int n)：初始化，使 1～n 之每個元素各自成為一個獨立集合。
+int find(int x)：回傳 x 所屬集合之樹根（代表元素），並採用路徑壓縮（Path Compression）——將查詢路徑上之所有節點直接改掛於樹根之下。
+int union_set(int a, int b)：合併 a 與 b 所屬之兩集合，採按大小合併（Union by Size）——
+將元素較少之集合的樹根，掛到元素較多之集合的樹根之下，以抑制樹高。
+若兩者原本已屬同一集合則不合併並回傳 0，成功合併則回傳 1。
+
+完成下列程式碼的空格。（每格 5 分，共 20 分）
+
+void init(int n) {
+    for (int i = 1; i <= n; i++) {
+        parent[i] = 　(1)　 ;         // 每個元素自成一集合
+        sz[i] = 1;                       // 每個集合初始只有 1 個元素
+    }
+}
+
+int find(int x) {
+    if (parent[x] == x) return x;      // x 本身即為樹根，直接回傳
+    parent[x] = find(parent[x]);        // 路徑壓縮：遞迴求得樹根，並將 x 直接改掛到樹根下
+    return 　(2)　 ;                 // 回傳樹根
+}
+
+int union_set(int a, int b) {
+    int ra = find(a), rb = find(b);     // 分別取得兩元素所屬集合之樹根
+    if (ra == rb) return 0;             // 已屬同一集合，無須合併
+
+    if (sz[ra] < sz[rb]) {              // 若 ra 之集合較小，則與 rb 交換
+        int t = ra; ra = rb; rb = t;    // 交換後保證：ra 為「較大集合」之樹根
+    }
+    parent[rb] = 　(3)　 ;             // 將較小集合之樹根掛到較大集合之樹根下
+    sz[ra] = 　(4)　 ;                 // 更新合併後集合之元素總數
+    return 1;
+}
+    */
+/*
+(1) parent[i] = i 
+(2) return parent[x]
+(3) ra
+(4) sz[ra] + sz[rb]
+*/
