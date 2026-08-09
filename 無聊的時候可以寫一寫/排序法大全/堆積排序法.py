@@ -22,7 +22,6 @@ def heapsort(arr) -> List[int]:
     n = len(arr)
     for i in range(n//2 - 1,-1,-1):
         heapify(arr , n , i)
-    print(arr)
     for j in range(n-1 ,0 ,-1):
         arr[0] , arr[j] = arr[j] , arr[0]
         heapify(arr ,j , 0)
