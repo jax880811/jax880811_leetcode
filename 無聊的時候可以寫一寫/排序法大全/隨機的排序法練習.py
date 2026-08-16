@@ -1,30 +1,23 @@
-def merge(left, right) -> list:
-    answer = []
-    n = 0
-    m = 0
-    while n < len(left) and m < len(right):
-        if left[n] < right[m]:
-            answer.append(left[n])
-            n += 1
-        else:
-            answer.append(right[m])
-            m += 1
-    while n < len(left):
-        answer.append(left[n])
-        n += 1
-    while m < len(right):
-        answer.append(right[m])
-        m += 1
-    return answer
 
 
 def random_sort(arr) -> list:
     if len(arr) < 2:
         return arr
-    mid = len(arr) // 2
-    left = random_sort(arr[:mid])
-    right = random_sort(arr[mid:])
-    return merge(left, right)
+    n = len(arr)
+    for i in range(n):
+        maximum = i
+        for j in range(i+1 ,n , 1):
+            if arr[j] > arr[maximum]:
+                maximum = j
+        if maximum != i:
+            
+            temp = arr[i]
+            arr[i] = arr[maximum]
+            arr[maximum] = temp
+            
+            
+
+    return arr
 
 
 # --- 測試程式碼 ---
@@ -32,6 +25,58 @@ arr = [8, 42, 15, 77, 3, 91, 56, 24, 68, 30]
 print("原始陣列：", arr)
 print("排序結果：", random_sort(arr))
 
+"""
+#選擇排序(從大到小)
+
+def random_sort(arr) -> list:
+    if len(arr) < 2:
+        return arr
+
+    n = len(arr)
+
+    for i in range(n):
+        # 先假設目前位置就是剩餘區間中的最大值
+        maximum = i
+
+        # 從 i+1 開始找真正的最大值
+        for j in range(i + 1, n):
+            if arr[j] > arr[maximum]:
+                maximum = j
+
+        # 若最大值不在目前位置，就交換
+        if maximum != i:
+            temp = arr[i]
+            arr[i] = arr[maximum]
+            arr[maximum] = temp
+
+    return arr
+"""
+
+
+"""
+泡泡排序法
+def random_sort(arr) -> list:
+    # 只有 0 或 1 個元素時，本身已排序
+    if len(arr) < 2:
+        return arr
+
+    # 取得陣列長度
+    n = len(arr)
+
+    # 外層控制總共需要幾輪
+    for i in range(n):
+
+        # 每完成一輪，右邊會多一個已排序元素
+        # 因此後面的部分不需要再次比較
+        for j in range(n - i - 1):
+
+            # 若左邊元素大於右邊元素，就交換
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+    # 回傳排序完成的陣列
+    return arr
+"""
 """
 def merge(left, right) -> list:
     # 建立結果陣列，用來存放合併後的排序結果
