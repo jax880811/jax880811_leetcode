@@ -12,6 +12,7 @@ pause()	暫停 0.1 秒。
 請撰寫函式 GetBatchNo(typeid, maxfail)，輸入為檢驗類別代碼與鎖定失敗上限次數；
 成功時傳回該類別下一個批號，並將批號變數加 1；若鎖定失敗次數超過上限，回傳 0。需使用上述所有函式。（14 分）
 '''
+
 def GetBatchNo(typeid, maxfail) -> int:
     fail = 0
     while fail <= maxfail:
@@ -59,5 +60,39 @@ def GetBatchNo(typeid, maxfail) -> int:
             return 0
 
         # 尚未超過失敗上限，暫停 0.1 秒後再嘗試
+        pause()
+'''
+'''
+def GetBatchNo(typeid, maxfail) -> int:
+    # 紀錄目前鎖定失敗次數
+    fail = 0
+
+    # 只要失敗次數尚未超過上限，就持續嘗試
+    while fail <= maxfail:
+
+        # 嘗試取得指定類別的鎖
+        if acquire(typeid) == 1:
+
+            # 讀取目前可使用的批號
+            answer = readno(typeid)
+
+            # 將下一個可使用批號更新為目前批號 + 1
+            writeno(typeid, answer + 1)
+
+            # 使用完共享資料後解除鎖定
+            release(typeid)
+
+            # 回傳本次取得的批號
+            return answer
+
+        else:
+            # 取得鎖失敗，失敗次數加 1
+            fail += 1
+
+        # 若失敗次數已超過上限，回傳 0
+        if fail > maxfail:
+            return 0
+
+        # 尚未超過上限，等待 0.1 秒後再重試
         pause()
 '''

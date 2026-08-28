@@ -1,20 +1,18 @@
+import math
 
+def heapify(arr , n ,i) ->list[int]:
+    if n < 2:
+        return arr
+    
+    return arr
+    
 
-def random_sort(arr) -> list:
+def random_sort(arr) -> list[int]:
     if len(arr) < 2:
         return arr
     n = len(arr)
-    for i in range(n):
-        maximum = i
-        for j in range(i+1 ,n , 1):
-            if arr[j] > arr[maximum]:
-                maximum = j
-        if maximum != i:
-            
-            temp = arr[i]
-            arr[i] = arr[maximum]
-            arr[maximum] = temp
-            
+    
+    
             
 
     return arr
@@ -24,6 +22,70 @@ def random_sort(arr) -> list:
 arr = [8, 42, 15, 77, 3, 91, 56, 24, 68, 30]
 print("原始陣列：", arr)
 print("排序結果：", random_sort(arr))
+print(int(math.pow(2, 31)))
+
+"""
+#堆積排序(由大到小，建立min-heap)
+
+def heapify(arr , n ,i) ->list[int]:
+    if n < 2:
+        return arr
+    smallest = i
+    left = 2*smallest + 1
+    right = 2*smallest + 2
+    if left < n and arr[left] < arr[smallest]:
+        smallest = left
+    if right < n and arr[right] < arr[smallest]:
+        smallest = right
+    if smallest != i:
+        arr[i] , arr[smallest] = arr[smallest] , arr[i]
+        heapify(arr , n ,smallest)
+    return arr
+    
+
+def random_sort(arr) -> list[int]:
+    if len(arr) < 2:
+        return arr
+    n = len(arr)
+    for i in range( n//2 - 1 , -1 , -1):
+        arr = heapify(arr , n , i)
+    for i in range( n - 1, -1 , -1):
+        arr[0] , arr[i] = arr[i] , arr[0]
+        arr = heapify(arr , i , 0)
+    
+            
+
+    return arr
+"""
+
+"""
+#插入排序
+def insertion_sort(arr) -> list:
+    # 只有 0 或 1 個元素時，本身已排序
+    if len(arr) < 2:
+        return arr
+
+    # 取得陣列長度
+    n = len(arr)
+
+    # 每輪把下一個元素插入前方已排序區域
+    for i in range(n - 1):
+        # j 指向目前要往左插入的元素
+        j = i + 1
+
+        # 只要目前元素比前一個小，就持續往左交換
+        while j > 0 and arr[j] < arr[j - 1]:
+            # 交換目前元素與前一個元素
+            temp = arr[j]
+            arr[j] = arr[j - 1]
+            arr[j - 1] = temp
+
+            # 繼續往左檢查
+            j -= 1
+
+    # 回傳排序完成的陣列
+    return arr
+"""
 
 """
 #選擇排序(從大到小)
