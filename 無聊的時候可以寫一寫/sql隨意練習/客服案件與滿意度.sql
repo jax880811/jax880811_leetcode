@@ -8,7 +8,93 @@
 
 滿意度 Satisfaction	案件編號（case_id）、分數（score）、回饋日期（feedback_date）
 
+*/
+
+
 /*
+案件查詢畫面每頁顯示 10 筆，請依受理日期由新到舊、同日依案件編號由小到大排序，
+列出第 2 頁（第 11 至第 20 筆）案件之案件編號、客戶代號、案件類別、受理日期及狀態。（5 分）
+select t2.case_id,
+    t2.customer_id,
+    t2.case_type,
+    t2.open_date,
+    t2.status
+from ServiceCase t2
+order by t2.open_date desc , t2.case_id asc
+limit 10 offset 10
+------------------------------------
+SELECT
+    t2.case_id,                              -- 輸出案件編號
+    t2.customer_id,                          -- 輸出客戶代號
+    t2.case_type,                            -- 輸出案件類別
+    t2.open_date,                            -- 輸出受理日期
+    t2.status                                -- 輸出案件狀態
+FROM ServiceCase t2                          -- 從案件資料表查詢
+ORDER BY
+    t2.open_date DESC,                       -- 先依受理日期由新到舊排序
+    t2.case_id ASC                           -- 同日案件再依案件編號由小到大排序
+LIMIT 10                                     -- 每頁顯示 10 筆
+OFFSET 10;                                   -- 跳過前 10 筆，取得第 11～20 筆
+
+
+*/
+
+
+/*
+請列出平均滿意度分數高於全體案件平均滿意度之客戶代號、客戶姓名及平均分數，
+平均分數四捨五入至小數點以下 1 位；沒有滿意度紀錄的案件不納入計算。（5 分）
+select t1.customer_id , t1.customer_name , round(avg(t3.score) , 1) as 平均分數
+FROM Customer t1
+join ServiceCase t2 on t1.customer_id = t2.customer_id
+join Satisfaction t3 on t2.case_id = t3.case_id
+group by t1.customer_id , t1.customer_name
+having avg(t3.score) > (
+    select avg(t3.score)
+    from Satisfaction t3
+)
+------------------------------
+SELECT
+    t1.customer_id,                           -- 輸出客戶代號
+    t1.customer_name,                         -- 輸出客戶姓名
+    ROUND(AVG(t3.score), 1) AS 平均分數       -- 計算該客戶平均滿意度，並四捨五入至小數第 1 位
+FROM Customer t1                              -- 客戶資料表
+JOIN ServiceCase t2
+    ON t1.customer_id = t2.customer_id        -- 依客戶代號連接案件資料
+JOIN Satisfaction t3
+    ON t2.case_id = t3.case_id                -- 只保留有滿意度紀錄的案件
+GROUP BY
+    t1.customer_id,                           -- 依客戶代號分組
+    t1.customer_name                          -- 同時依客戶姓名分組
+HAVING
+    AVG(t3.score) > (                         -- 篩選客戶平均分數高於全體案件平均分數者
+        SELECT
+            AVG(s2.score)                     -- 計算所有滿意度紀錄的整體平均分數
+        FROM Satisfaction s2                  -- 沒有滿意度紀錄的案件自然不會被納入
+    );
+
+*/
+
+/*
+請統計各地區高（H）、中（M）、低（L）優先等級案件數，輸出地區、高優先案件數、中優先案件數及低優先案件數。（5 分）
+select t1.region , 
+    sum(
+        case when t2.priority = 'H'
+        then 1 else 0
+        end
+    ) as 高優先案件數 ,
+    sum(
+        case when t2.priority = 'M'
+        then 1 else 0
+        end
+    ) as 中優先案件數 ,
+    sum(
+        case when t2.priority = 'L'
+        then 1 else 0
+        end
+    ) as 低優先案件數
+FROM Customer t1
+join ServiceCase t2 on t1.customer_id = t2.customer_id
+group by t1.region
 
 
 
