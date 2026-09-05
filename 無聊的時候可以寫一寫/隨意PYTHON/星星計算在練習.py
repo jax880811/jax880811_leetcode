@@ -20,6 +20,39 @@ Plaintext
   ***
     *
 '''
+
+mode = int(input())
+star = int(input())
+space = " "
+if mode == 1:
+    for i in range(star,0,-2):
+        s = '*' * i
+        print(s)
+elif mode == 2:
+    for i in range(star,0,-2):
+        s = space * ((star-i)//2) + "*" * i + space * ((star-i)//2)
+        print(s)
+elif mode == 3:
+    for i in range(star,0,-2):
+        s = space * ((star-i)) + "*" * i
+        print(s)
+else:
+    print("不對")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 mode = int(input())
 star = int(input())
 
@@ -39,3 +72,5 @@ elif mode == 3:
 
 for r in result:
     print(r)
+
+    '''
