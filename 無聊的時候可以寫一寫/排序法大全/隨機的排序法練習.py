@@ -1,29 +1,95 @@
 import math
 
-def heapify(arr , n ,i) ->list[int]:
-    if n < 2:
-        return arr
-    
-    return arr
+
     
 
 def random_sort(arr) -> list[int]:
-    if len(arr) < 2:
+    check = {}
+    for n in arr:
+        if n in check:
+            check[n] += 1
+        else:
+            check[n] = 1
+    low = min(arr)
+    high = max(arr)
+    if low == high:
         return arr
-    n = len(arr)
+    answer = []
+    while low <= high:
+        while low in check and check[low] >= 1:
+            answer.append(low)
+            check[low] -= 1
+        low += 1
     
-    
-            
 
-    return arr
+    return answer
 
 
 # --- 測試程式碼 ---
 arr = [8, 42, 15, 77, 3, 91, 56, 24, 68, 30]
 print("原始陣列：", arr)
 print("排序結果：", random_sort(arr))
-print(int(math.pow(2, 31)))
 
+"""
+def random_sort(arr) -> list[int]:
+    check = {}  # 記錄每個數字出現的次數
+
+    for n in arr:  # 逐一讀取陣列中的數字
+        if n in check:
+            check[n] += 1  # 已出現過，次數加 1
+        else:
+            check[n] = 1  # 第一次出現，次數設為 1
+
+    low = min(arr)  # 找出最小值
+    high = max(arr)  # 找出最大值
+
+    if low == high:
+        return arr  # 如果全部數字都相同，直接回傳
+
+    answer = []  # 儲存排序結果
+
+    while low <= high:  # 從最小值一路檢查到最大值
+        while low in check and check[low] >= 1:
+            answer.append(low)  # 將目前數字加入答案
+            check[low] -= 1  # 該數字剩餘次數減 1
+
+        low += 1  # 檢查下一個數字
+
+    return answer  # 回傳排序完成的結果
+"""
+
+"""
+radix sort(不用集合)
+def random_sort(arr) -> list[int]:
+    low = min(arr)  # 找出陣列中的最小值
+    high = max(arr)  # 找出陣列中的最大值
+
+    if low == high:
+        return arr  # 如果最大值等於最小值，代表所有元素都相同，直接回傳
+
+    index = high - low + 1  # 計算從最小值到最大值總共有多少種可能數值
+
+    check = [0] * index  # 建立計數陣列，用來記錄每個數值出現的次數
+
+    for n in arr:
+        check[n - low] += 1  # 將數值平移後，記錄該數字出現次數
+
+    answer = []  # 建立結果陣列，用來存放排序後的資料
+
+    for i in range(index):
+        while check[i] > 0:  # 如果目前這個數值還有出現次數
+            answer.append(i + low)  # 將索引轉回原本的數值並加入答案
+            check[i] -= 1  # 該數值剩餘次數減 1
+
+    return answer  # 回傳排序完成的陣列
+
+
+# --- 測試程式碼 ---
+arr = [8, 42, 15, 77, 3, 91, 56, 24, 68, 30]  # 建立測試陣列
+
+print("原始陣列：", arr)  # 印出排序前陣列
+print("排序結果：", random_sort(arr))  # 呼叫排序函式並印出結果
+"""
 """
 #堆積排序(由大到小，建立min-heap)
 

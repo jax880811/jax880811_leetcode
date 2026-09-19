@@ -1,0 +1,35 @@
+/*
+給定兩條由小到大排序之單向鏈結串列（Singly Linked List），欲將其合併為一條仍保持由小到大排序之單一串列。節點在 C 語言中宣告如下：
+
+typedef struct Node {
+    int val;              // 節點資料值
+    struct Node *next;   // 指向下一個節點，串列尾端之 next 為 NULL
+} Node;
+函式 merge(Node *a, Node *b) 接收兩條已排序串列之首節點指標 a 與 b，回傳合併後串列之首節點指標。本實作採用一個「虛擬頭節點（dummy head）」簡化邊界處理：以 tail 指標逐一將 a、b 中較小之節點串接至結果串列尾端。完成下列程式碼的空格。（每格 5 分，共 20 分）
+
+Node* merge(Node *a, Node *b) {
+    Node dummy;                          // 虛擬頭節點（區域變數，其 next 將指向結果串列首節點）
+    Node *tail = &dummy;                 // tail 永遠指向「目前結果串列的最後一個節點」
+    dummy.next = NULL;
+
+    while (a != NULL && b != NULL) {     // 兩串列皆尚有節點時，比較挑較小者
+        if (a->val <= b->val) {
+            tail->next = a;              // 較小者（a）接到結果串列尾端
+            a = 　(1)　 ;              // a 前進到下一個節點
+        } else {
+            tail->next = b;              // 較小者（b）接到結果串列尾端
+            b = b->next;                 // b 前進到下一個節點
+        }
+        tail = 　(2)　 ;                  // tail 前進到剛接上的節點，維持「指向最後一個」
+    }
+
+    tail->next = (a != NULL) ? 　(3)　 : b;  // 其中一串已走完，將另一串「剩餘全部」直接接上
+
+    return 　(4)　 ;                      // 回傳結果串列的首節點（非 dummy 本身）
+}
+(1) a -> next
+(2) tail -> next
+(3) a
+(4) dummy -> next
+
+*/
