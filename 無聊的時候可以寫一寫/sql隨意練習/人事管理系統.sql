@@ -16,6 +16,84 @@
 （六）請統計各部門之員工人數與平均薪資（平均四捨五入至整數），僅列出員工人數達 10 人（含）以上之部門，
 輸出欄位：部門名稱、員工人數、平均薪資，按平均薪資由高到低排序。
 */
+/*
+六）請統計各部門之員工人數與平均薪資（平均四捨五入至整數），僅列出員工人數達 10 人（含）以上之部門，
+輸出欄位：部門名稱、員工人數、平均薪資，按平均薪資由高到低排序。
+select d.dept_name , count(e.emp_id) as 員工人數 , round(avg(e.salary) , 0) as 平均薪資
+from Dept d
+join employee e on d.dept_id = e.dept_id
+group by d.dept_name
+having count(e.emp_id) >= 10
+order by 平均薪資 desc
+
+
+*/
+
+
+/*
+（五）系統需新增「出勤紀錄」資料表 Attendance（欄位：紀錄編號 rec_id 為主鍵、員工代號 emp_id、日期 att_date、狀態 status），
+要求：當某員工自 Employee 資料表被刪除時，該員工之所有出勤紀錄須「自動一併刪除」。
+create table if not exists Attendance (
+    rec_id varchar(20) not null,
+    emp_id varchar(20) not null,
+    att_date datetime not null,
+    status varchar(20) not null,
+    primary key (rec_id),
+    foreign key (emp_id) references Employee(emp_id), on delete cascade
+)
+----------------------
+CREATE TABLE IF NOT EXISTS Attendance (
+    rec_id VARCHAR(20) NOT NULL,                 -- 出勤紀錄編號，不可為 NULL
+    emp_id VARCHAR(20) NOT NULL,                 -- 員工代號，不可為 NULL
+    att_date DATETIME NOT NULL,                  -- 出勤日期／時間，不可為 NULL
+    status VARCHAR(20) NOT NULL,                 -- 出勤狀態，不可為 NULL
+
+    PRIMARY KEY (rec_id),                        -- 設定 rec_id 為主鍵
+
+    FOREIGN KEY (emp_id)                         -- emp_id 為外來鍵
+        REFERENCES Employee(emp_id)              -- 參考 Employee 資料表的 emp_id
+        ON DELETE CASCADE                        -- 員工被刪除時，自動刪除其所有出勤紀錄
+);
+
+*/
+
+
+/*
+（三）人事系統經常以「姓名」進行查詢，為加速查詢效能，請於 Employee 資料表之 emp_name 欄位建立一個名為 idx_emp_name 之索引。
+CREATE INDEX idx_emp_name          -- 建立名為 idx_emp_name 的索引
+ON Employee(emp_name);             -- 索引建立在 Employee 的 emp_name 欄位
+
+*/
+
+/*
+(二）請列出「薪資高於自己所屬部門平均薪資」之員工姓名、薪資與部門代號。NEW
+SELECT
+    e.emp_name,                                  
+    e.salary,                                   
+    e.dept_id                                   
+FROM Employee e 
+where e.salary > (
+    select avg(e2.salary)
+    from employee e2
+    where e2.dept_id = e.dept_id
+)
+
+----------------------
+SELECT
+    e.emp_name,                                  -- 輸出員工姓名
+    e.salary,                                    -- 輸出員工薪資
+    e.dept_id                                    -- 輸出部門代號
+FROM Employee e                                  -- 逐筆檢查每一位員工
+WHERE
+    e.salary > (
+        SELECT
+            AVG(e2.salary)                       -- 計算該員工所屬部門的平均薪資
+        FROM Employee e2
+        WHERE
+            e2.dept_id = e.dept_id               -- 只計算與目前員工相同部門
+    );
+*/
+
 
 /*
 請列出各部門中最高薪資員工與最低薪資員工之姓名及薪資。

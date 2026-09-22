@@ -1,34 +1,90 @@
 import math
 
-
+def random_sort(arr):
+    if len(arr) < 2:
+        return arr  # 0 或 1 個元素不用排序
+    for i in range(len(arr) - 1):
+        smallest = i
+        for j in range(i , len(arr) , 1):
+            if arr[j] < arr[smallest]:
+                smallest = j
+        arr[i] , arr[smallest] = arr[smallest] , arr[i]
+    return arr
     
 
-def random_sort(arr) -> list[int]:
-    check = {}
-    for n in arr:
-        if n in check:
-            check[n] += 1
-        else:
-            check[n] = 1
-    low = min(arr)
-    high = max(arr)
-    if low == high:
-        return arr
-    answer = []
-    while low <= high:
-        while low in check and check[low] >= 1:
-            answer.append(low)
-            check[low] -= 1
-        low += 1
-    
-
-    return answer
 
 
 # --- 測試程式碼 ---
 arr = [8, 42, 15, 77, 3, 91, 56, 24, 68, 30]
 print("原始陣列：", arr)
 print("排序結果：", random_sort(arr))
+
+"""
+radix sort
+def counting_sort(arr, exp):
+    n = len(arr)  # 陣列長度
+    output = [0] * n  # 儲存這一輪排序結果
+    count = [0] * 10  # 數字只會有 0~9 十種
+
+    for i in range(n):
+        digit = (arr[i] // exp) % 10  # 取出目前位數
+        count[digit] += 1  # 統計這個位數出現次數
+
+    for i in range(1, 10):
+        count[i] += count[i - 1]  # 轉成累積位置
+
+    for i in range(n - 1, -1, -1):
+        digit = (arr[i] // exp) % 10  # 再取得目前位數
+        output[count[digit] - 1] = arr[i]  # 放到正確位置
+        count[digit] -= 1  # 該位置往前移一格
+
+    for i in range(n):
+        arr[i] = output[i]  # 將排序結果寫回原陣列
+
+def radix_sort(arr):
+    if len(arr) < 2:
+        return arr  # 0 或 1 個元素不用排序
+
+    max_value = max(arr)  # 找最大值，決定要處理幾位數
+    exp = 1  # 從個位數開始
+
+    while max_value // exp > 0:
+        counting_sort(arr, exp)  # 依目前位數做穩定排序
+        exp *= 10  # 個位 → 十位 → 百位 → 千位
+
+    return arr
+"""
+
+"""
+記數排序法
+def random_sort(arr) -> list[int]:
+    check = {}  # 記錄每個數值出現的次數
+    answer = []  # 儲存排序後的結果
+
+    for a in arr:  # 逐一統計每個數值的出現次數
+        if a in check:
+            check[a] += 1  # 已經出現過，次數加 1
+        else:
+            check[a] = 1  # 第一次出現，次數設為 1
+
+    low = min(arr)  # 找出陣列中的最小值
+    high = max(arr)  # 找出陣列中的最大值
+
+    while low <= high:  # 從最小值一路掃到最大值
+        while low in check and check[low] > 0:
+            answer.append(low)  # 將目前數值加入排序結果
+            check[low] -= 1  # 該數值剩餘次數減 1
+
+        low += 1  # 繼續檢查下一個數值
+
+    return answer  # 回傳排序後結果
+
+
+arr = [8, 42, 15, 77, 3, 91, 56, 24, 68, 30]
+print("原始陣列：", arr)
+print("排序結果：", random_sort(arr))
+"""
+
 
 """
 def random_sort(arr) -> list[int]:
